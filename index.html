@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<style>
+	body {
+		padding: 0;
+		margin: 0;
+		background-color: #055f4c;
+	}
+
+	* {
+		font-family: 'Dubai', sans-serif;
+	}
+
+	main {
+		width: 100%;
+		height: 100vh;
+		display: grid;
+		place-items: center;
+	}
+
+	@media (min-width: 1000px) {
+		body {
+			background: url('https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80') no-repeat center 100%;
+			background-size: cover;
+		}
+	}
+
+	.board {
+		width: 450px;
+		height: 450px;
+		background-color: rgba(48, 163, 138, 0.521);
+		backdrop-filter: blur(10px);
+		display: grid;
+		place-items: center;
+		padding: 20px;
+	}
+
+	.row {
+		display: flex;
+		flex-direction: row;
+	}
+
+	.col {
+		width: 100px;
+		height: 100px;
+		margin: 5px;
+		background-color: rgba(1, 10, 6, 0.568);
+		backdrop-filter: blur(20px);
+		font-weight: bold;
+		text-align: center;
+		font-size: 35px;
+		line-height: 100px;
+		color: #fff;
+	}
+
+	.free-block {
+		background-color: rgba(255, 255, 255, 0);
+		backdrop-filter: blur(0px);
+	}
+</style>
+
+<body>
+	<main>
+		<div class="board">
+
+		</div>
+	</main>
+	<script src="index.js"></script>
+</body>
+
+</html>
