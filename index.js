@@ -52,8 +52,8 @@ function detectMoves()
 		makeMoves(e.key)
 	})
 	let blocks = document.querySelectorAll('.col')
-	blocks.forEach(e => {
-		e.addEventListener('click', evt => {
+//	blocks.forEach(e => {bbiasdf
+	board.addEventListener('click', evt => {
 			let aimedBlock = evt.path[0]
 			let aimedBlockId = [+aimedBlock.id[0], +aimedBlock.id[1]]
 			let freeBlock = document.querySelector('.free-block')
@@ -69,7 +69,7 @@ function detectMoves()
 				case "10": makeMoves('ArrowUp');break;
 			}
 		})
-	})
+//	})
 }
 function makeMoves(action) 
 {
@@ -104,7 +104,7 @@ function makeMoves(action)
 	aimedBlock.classList.add('free-block')
 	freeBlock.classList.remove('free-block')
 	moves ++;
-	if ( moves > 16 && checkGame()) {
+	if ( moves > 30 && checkGame()) {
 		if(confirm("Congradulations! You won the game. Do you want to play again?")){
 			history.go('/')
 		}
