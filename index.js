@@ -10,7 +10,6 @@ function generateList(start, end){
 
 var [listOfNumbers, setListOfNumbers] = [generateList(1,16), (val) => {listOfNumbers = val}]
 
-
 function selectRandom(list) {
 	if (typeof list == 'object')
 	{
@@ -54,7 +53,7 @@ function detectMoves()
 	let blocks = document.querySelectorAll('.col')
 //	blocks.forEach(e => {bbiasdf
 	board.addEventListener('click', evt => {
-			let aimedBlock = evt.path[0]
+			let aimedBlock = evt.target
 			let aimedBlockId = [+aimedBlock.id[0], +aimedBlock.id[1]]
 			let freeBlock = document.querySelector('.free-block')
 			let fBlockId = [+freeBlock.id[0], +freeBlock.id[1]]
@@ -69,8 +68,8 @@ function detectMoves()
 				case "10": makeMoves('ArrowUp');break;
 			}
 		})
-//	})
 }
+
 function makeMoves(action) 
 {
 	let freeBlock = document.querySelector('.free-block')
@@ -96,7 +95,6 @@ function makeMoves(action)
 	globalGameState[aimedID[0]][aimedID[1]] = undefined
 	this.prevStateCache = [aimedID[0], aimedID[1]]
 
-
 	let aimedBlock = document.getElementById(aimedID.join(''))
 	freeBlock.textContent = aimedBlock.innerHTML
 	aimedBlock.innerHTML = ''
@@ -110,17 +108,49 @@ function makeMoves(action)
 		}
 	}
 }
+
 function checkGame() {
 	let winCount = 0
 	for( let i in globalGameState ) {
 		for (let j in globalGameState[i]){
-			if (globalGameState[i][j] - i * 4 == +j+1 ) {
+			if ( globalGameState[i][j] - i * 4 == +j+1 ) {
 				winCount++;
 			} 
 		}
 	}
 	return winCount === 15 ? true : false;
 }
+
+function incOneSec(prevTime){
+	let sec = prevTime[0]; min = prevTime[1]; hr = prevTime[2];
+	++sec;
+	if (sec > 60){
+		sec = 0;
+		++min;
+	}if (min > 60) {
+		min = 0
+		++hr
+	}
+	return [sec, min, hr]
+}
+
+function startGame() {
+	let startBtn = document.getElementById('start')
+	let timerBlock = document.querySelector('.timer')
+	
+	function startTimer() {
+		document.querySelector('.overlay').classList.add('hide');
+		startBtn.removeEventListener('click', startTimer)
+		setInterval(() => {
+			[sec, min, hr] = incOneSec([sec, min, hr])
+			timerBlock.textContent = ('0'+hr).substr(-2) + ':'+ ('0'+min).substr(-2) + ':' + ('0'+sec).substr(-2)
+		}, 1000);
+	}
+	startBtn.addEventListener('click', startTimer)
+}
+
+var sec = 0; min = 0; hr = 0; 
+startGame()
 var globalGameState = placeNumbers()
 var moves = 0
 detectMoves()
